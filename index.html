@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Most Active Users</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="light-mode">
+    <!-- Top bar with the theme toggle button -->
+    <div class="top-bar">
+      <button id="theme-btn" onclick="toggleTheme()">Dark Mode</button>
+    </div>
+
+    <!-- Main content area -->
+    <div class="container">
+      <h1>Most Active Users</h1>
+
+      <!-- Table wrapper allows horizontal scroll on small screens -->
+      <div class="table-wrapper">
+        <table id="users-table">
+          <thead>
+            <tr>
+              <!-- Each header is clickable for sorting -->
+              <th onclick="sortTable('name')">
+                Name <span class="sort-icon" id="icon-name">↕</span>
+              </th>
+              <th onclick="sortTable('email')">
+                Email <span class="sort-icon" id="icon-email">↕</span>
+              </th>
+              <th onclick="sortTable('username')">
+                Username <span class="sort-icon" id="icon-username">↕</span>
+              </th>
+              <th onclick="sortTable('country')">
+                Country <span class="sort-icon" id="icon-country">↕</span>
+              </th>
+            </tr>
+          </thead>
+
+          <!-- Rows are injected here by brain.js -->
+          <tbody id="table-body">
+            <tr>
+              <td colspan="4" class="loading-msg">Loading users...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination controls are injected here by brain.js -->
+      <div class="pagination" id="pagination"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

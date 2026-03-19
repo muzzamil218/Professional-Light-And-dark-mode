@@ -1,0 +1,314 @@
+/* =============================================
+   CSS VARIABLES — one place to control all colors
+   ============================================= */
+
+/* Light mode */
+.light-mode {
+  --bg-page: #f0f2f5;
+  --bg-container: #ffffff;
+  --text-main: #1a1a1a;
+  --text-header: #ffffff;
+  --header-bg: #4a7cf7;
+  --row-bg: #ffffff;
+  --row-bg-alt: #f7f9ff; /* subtle stripe on even rows      */
+  --row-hover-bg: #bdd0ff; /* clear blue highlight on hover   */
+  --row-hover-text: #0a1a4a; /* darker text on hovered row      */
+  --border-color: #d4d8e1;
+  --top-bar-bg: #ffffff;
+  --top-bar-border: #e0e0e0;
+  --btn-text: #4a7cf7;
+  --btn-border: #4a7cf7;
+  --btn-hover-bg: #4a7cf7;
+  --btn-hover-text: #ffffff;
+  --pagination-color: #4a7cf7;
+  --pagination-active-bg: #4a7cf7;
+  --pagination-active-txt: #ffffff;
+  --pagination-hover-bg: #4a7cf7;
+  --pagination-hover-txt: #ffffff;
+}
+
+/* Dark mode */
+.dark-mode {
+  --bg-page: #111111;
+  --bg-container: #1a1a1a;
+  --text-main: #e0e0e0;
+  --text-header: #e0e0e0;
+  --header-bg: #2a2a2a;
+  --row-bg: #1a1a1a;
+  --row-bg-alt: #202020; /* subtle stripe on even rows      */
+  --row-hover-bg: #3a3f50; /* lighter highlight on hover      */
+  --row-hover-text: #ffffff; /* brighter text on hovered row    */
+  --border-color: #2e2e2e;
+  --top-bar-bg: #1a1a1a;
+  --top-bar-border: #2a2a2a;
+  --btn-text: #7aaaff;
+  --btn-border: #7aaaff;
+  --btn-hover-bg: #7aaaff;
+  --btn-hover-text: #111111;
+  --pagination-color: #7aaaff;
+  --pagination-active-bg: #7aaaff;
+  --pagination-active-txt: #111111;
+  --pagination-hover-bg: #7aaaff;
+  --pagination-hover-txt: #111111;
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* =============================================
+   TOP BAR
+   ============================================= */
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 12px 28px;
+  background-color: var(--top-bar-bg);
+  border-bottom: 1px solid var(--top-bar-border);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+#theme-btn {
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1.5px solid var(--btn-border);
+  background-color: transparent;
+  color: var(--btn-text);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+#theme-btn:hover {
+  background-color: var(--btn-hover-bg);
+  color: var(--btn-hover-text);
+}
+
+/* =============================================
+   CONTAINER
+   ============================================= */
+
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 22px;
+  color: var(--text-main);
+}
+
+/* =============================================
+   TABLE WRAPPER — horizontal scroll on small screens
+   ============================================= */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
+}
+
+/* =============================================
+   TABLE
+   ============================================= */
+
+#users-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+/* Header row */
+#users-table thead tr {
+  background-color: var(--header-bg);
+  transition: background-color 0.3s ease;
+}
+
+#users-table thead th {
+  padding: 15px 22px;
+  text-align: left;
+  color: var(--text-header);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  /* user-select: none; */
+  white-space: nowrap;
+  transition: filter 0.2s ease;
+}
+
+#users-table thead th:hover {
+  filter: brightness(1.15);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Sort direction arrows */
+.sort-icon {
+  font-size: 12px;
+  margin-left: 5px;
+  opacity: 0.8;
+}
+
+/* Data rows — base style */
+#users-table tbody tr {
+  background-color: var(--row-bg);
+  border-bottom: 1px solid var(--border-color);
+
+  /* Smooth transition so the hover color fades in nicely */
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.3s ease;
+}
+
+/* Alternating row stripe (every even row is slightly different) */
+#users-table tbody tr:nth-child(even) {
+  background-color: var(--row-bg-alt);
+}
+
+/* Remove bottom border from the last row */
+#users-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* ===== HOVER EFFECT — this is the key part ===== */
+/* When mouse is over any data row, change its background and text color */
+#users-table tbody tr:hover {
+  background-color: var(--row-hover-bg); /* strong color change             */
+  color: var(
+    --row-hover-text
+  ); /* text gets darker (light) or brighter (dark) */
+  cursor: default;
+}
+
+/* Table data cells */
+#users-table tbody td {
+  padding: 14px 22px;
+  font-size: 14px;
+  /* color inherits from the tr so the hover text color applies automatically */
+}
+
+/* Loading or error message */
+.loading-msg {
+  text-align: center;
+  padding: 30px !important;
+  color: #888888;
+  font-style: italic;
+}
+
+/* =============================================
+   PAGINATION
+   ============================================= */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  padding: 7px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: var(--row-bg);
+  color: var(--pagination-color);
+  cursor: pointer;
+  min-width: 36px;
+  text-align: center;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.page-btn:hover {
+  background-color: var(--pagination-hover-bg);
+  color: var(--pagination-hover-txt);
+  border-color: var(--pagination-hover-bg);
+}
+
+/* Currently active page number */
+.page-btn.active {
+  background-color: var(--pagination-active-bg);
+  color: var(--pagination-active-txt);
+  border-color: var(--pagination-active-bg);
+  font-weight: 700;
+  cursor: default;
+}
+
+/* Disabled prev/next arrows */
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Arrow buttons (‹ and ›) are slightly bigger */
+.page-arrow {
+  font-size: 18px;
+  padding: 5px 12px;
+}
+
+/* =============================================
+   MOBILE — screens narrower than 600px
+   ============================================= */
+
+@media (max-width: 600px) {
+  .container {
+    margin: 20px auto;
+  }
+
+  .container h1 {
+    font-size: 22px;
+  }
+
+  #users-table thead th,
+  #users-table tbody td {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .page-btn {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  #theme-btn {
+    font-size: 13px;
+    padding: 7px 14px;
+  }
+}
